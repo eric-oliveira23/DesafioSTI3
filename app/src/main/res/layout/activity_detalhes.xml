@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_primary">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_primary"
+        tools:context=".activity.DetalhesActivity">
+
+        <RelativeLayout
+            android:id="@+id/relativeTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/grey_secondary">
+
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="12dp"
+                android:src="@drawable/ic_chevron_left" />
+
+            <ImageView
+                android:id="@+id/imgBox"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@id/btnBack"
+                android:src="@drawable/box" />
+
+            <TextView
+                android:id="@+id/txvCodigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/imgBox"
+                android:text="Número: 1" />
+
+            <TextView
+                android:id="@+id/txvTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txvCodigo"
+                android:layout_toEndOf="@+id/imgBox"
+                android:text="Informações do pedido"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/lblDadosEntrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeTop"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Dados da entrega"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblEntrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblDadosEntrega"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:text="Endereço de entrega"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvRua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblEntrega"
+            android:layout_marginStart="20dp"
+            android:text="Super Girl Street "
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblNumeroRua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvRua"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Número"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvNumeroEndereco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblNumeroRua"
+            android:layout_marginStart="20dp"
+            android:text="100"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblCep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvNumeroEndereco"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="CEP"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvCep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblCep"
+            android:layout_marginStart="20dp"
+            android:text="0000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblBairro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvCep"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Bairro"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvBairro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblBairro"
+            android:layout_marginStart="20dp"
+            android:text="Bairro das roseiras"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblCidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvBairro"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Cidade"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvCidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblCidade"
+            android:layout_marginStart="20dp"
+            android:text="Argo City"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvCidade"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Estado"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblEstado"
+            android:layout_marginStart="20dp"
+            android:text="KT"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblComplemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvEstado"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Complemento"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvComplemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblComplemento"
+            android:layout_marginStart="20dp"
+            android:text="não informado"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblReferencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvComplemento"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Referência"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvReferencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblReferencia"
+            android:layout_marginStart="20dp"
+            android:text="não informado"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/lblDadosCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txvReferencia"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="Dados do cliente"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblDadosCliente"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Cliente"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblCliente"
+            android:layout_marginStart="20dp"
+            android:text="Kara Danvers"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblDocumento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvCliente"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Documento"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvDocumento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblDocumento"
+            android:layout_marginStart="20dp"
+            android:text="32565895"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblNascimento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvDocumento"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Nascimento"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvNascimento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblNascimento"
+            android:layout_marginStart="20dp"
+            android:text="23/08/2004"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvNascimento"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Email"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblEmail"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="15dp"
+            android:text="kara@gmail.com"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txvEmail"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="Itens"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerItens"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblItems" />
+
+        <View
+            android:id="@+id/dividerPrices"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/recyclerItens"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/lblDesconto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dividerPrices"
+            android:layout_marginStart="25dp"
+            android:text="Desconto"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txvDesconto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dividerPrices"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="25dp"
+            android:text="R$ 0,00"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lblFrete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvDesconto"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="3dp"
+            android:text="Frete"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txvFrete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvDesconto"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="25dp"
+            android:text="R$ 0,00"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lblSubtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvFrete"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
+            android:text="Subtotal"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txvSubtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvFrete"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="25dp"
+            android:text="R$ 0,00"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/dividerCliente"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/txvSubtotal"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/lblTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dividerCliente"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="15dp"
+            android:text="Total"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dividerCliente"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="25dp"
+            android:text="R$ 0,00"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</ScrollView>

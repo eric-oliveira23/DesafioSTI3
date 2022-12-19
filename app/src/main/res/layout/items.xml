@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@color/grey_primary">
+
+    <TextView
+        android:id="@+id/txvQuantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="1x"
+        android:textColor="@color/light_grey" />
+
+    <TextView
+        android:id="@+id/txvProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txvQuantidade"
+        android:layout_marginStart="20dp"
+        android:text="Tênis Stark Runner"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txvPreco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvQuantidade"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:text="R$ 150,00"/>
+
+</RelativeLayout>
