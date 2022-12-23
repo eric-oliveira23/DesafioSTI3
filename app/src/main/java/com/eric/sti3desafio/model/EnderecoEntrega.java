@@ -1,41 +1,62 @@
 package com.eric.sti3desafio.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import static androidx.room.ForeignKey.CASCADE;
 
-public class EnderecoEntrega implements Parcelable {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
+@Entity(
+        tableName = "enderecos",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = Pedido.class,
+                        parentColumns = {"id"},
+                        childColumns = {"EnderecoIdMap"},
+                        onDelete = CASCADE,
+                        onUpdate = CASCADE
+                )
+        }
+)
+public class EnderecoEntrega implements Serializable {
+
+    @PrimaryKey
+    Long EnderecoRoomId = null;
+
+    @ColumnInfo(index = true)
+    String EnderecoIdMap;
+
+    @ColumnInfo(name = "idEntrega")
     private String id;
+
+    @ColumnInfo(name = "endereco")
     private String endereco;
+
+    @ColumnInfo(name = "numeroEntrega")
     private String numero;
+
+    @ColumnInfo(name = "cep")
     private String cep;
+
+    @ColumnInfo(name = "bairro")
     private String bairro;
+
+    @ColumnInfo(name = "cidade")
     private String cidade;
+
+    @ColumnInfo(name = "complemento")
     private String complemento;
+
+    @ColumnInfo(name = "referencia")
     private String referencia;
 
-    protected EnderecoEntrega(Parcel in) {
-        id = in.readString();
-        endereco = in.readString();
-        numero = in.readString();
-        cep = in.readString();
-        bairro = in.readString();
-        cidade = in.readString();
-        complemento = in.readString();
-        referencia = in.readString();
-    }
+    @ColumnInfo(name = "estado")
+    private String estado;
 
-    public static final Creator<EnderecoEntrega> CREATOR = new Creator<EnderecoEntrega>() {
-        @Override
-        public EnderecoEntrega createFromParcel(Parcel in) {
-            return new EnderecoEntrega(in);
-        }
-
-        @Override
-        public EnderecoEntrega[] newArray(int size) {
-            return new EnderecoEntrega[size];
-        }
-    };
+    public EnderecoEntrega() {}
 
     public String getId() {
         return id;
@@ -101,20 +122,27 @@ public class EnderecoEntrega implements Parcelable {
         this.referencia = referencia;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public Long getEnderecoRoomId() {
+        return EnderecoRoomId;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
-        parcel.writeString(endereco);
-        parcel.writeString(numero);
-        parcel.writeString(cep);
-        parcel.writeString(bairro);
-        parcel.writeString(cidade);
-        parcel.writeString(complemento);
-        parcel.writeString(referencia);
+    public void setEnderecoRoomId(Long enderecoRoomId) {
+        EnderecoRoomId = enderecoRoomId;
+    }
+
+    public String getEnderecoIdMap() {
+        return EnderecoIdMap;
+    }
+
+    public void setEnderecoIdMap(String enderecoIdMap) {
+        EnderecoIdMap = enderecoIdMap;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

@@ -2,6 +2,7 @@ package com.eric.sti3desafio.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.eric.sti3desafio.R;
 import com.eric.sti3desafio.activity.DetalhesActivity;
 import com.eric.sti3desafio.adapter.PedidoAdapter;
 import com.eric.sti3desafio.api.DataService;
+import com.eric.sti3desafio.database.MyDatabase;
 import com.eric.sti3desafio.model.Pedido;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -38,6 +41,7 @@ public class PesquisarFragment extends Fragment {
     private List<Pedido> pedidos = new ArrayList<>();
     private PedidoAdapter.RecyclerViewClickListener listener;
     Retrofit retrofit;
+    private MyDatabase db;
 
     public PesquisarFragment() {
 
@@ -111,34 +115,41 @@ public class PesquisarFragment extends Fragment {
         DataService dataService = retrofit.create(DataService.class);
         Call<List<Pedido>> pedidoCall = dataService.recuperarPedidos();
 
+        db = Room.databaseBuilder(getActivity(), MyDatabase.class, "MyDB")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
+
         pedidoCall.enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
+
                     pedidos = response.body();
-                    //define o adapter
-                    pedidoAdapter = new PedidoAdapter(pedidos, getActivity(), listener);
-                    recyclerSearch.setAdapter(pedidoAdapter);
+                    db.pedidoDAO().insertAll(pedidos);
+                    setAdapter();
                 }
+
             }
 
             @Override
             public void onFailure(Call<List<Pedido>> call, Throwable t) {
-
+                Log.i("info", t + "");
+                setAdapter();
             }
-
         });
-
     }
 
-    public void pedidosClickListener(){
+    public void pedidosClickListener() {
 
         listener = new PedidoAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
 
                 Intent intent = new Intent(getActivity(), DetalhesActivity.class);
+
+                intent.putExtra("pedidoData", pedidoAdapter.getItem(position));
 
                 startActivity(intent);
 
@@ -147,6 +158,13 @@ public class PesquisarFragment extends Fragment {
 
     }
 
+    public void setAdapter() {
+        List<Pedido> pedidosDb = new ArrayList<>();
+        pedidosDb = db.pedidoDAO().getAll();
+
+        pedidoAdapter = new PedidoAdapter(pedidosDb, getActivity(), listener);
+        recyclerSearch.setAdapter(pedidoAdapter);
+    }
     private void filterList(String text) {
         List<Pedido> filteredList = new ArrayList<>();
         for (Pedido pedido : pedidos) {

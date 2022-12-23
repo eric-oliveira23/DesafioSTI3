@@ -12,11 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.eric.sti3desafio.R;
 import com.eric.sti3desafio.activity.DetalhesActivity;
 import com.eric.sti3desafio.adapter.PedidoAdapter;
 import com.eric.sti3desafio.api.DataService;
+import com.eric.sti3desafio.database.MyDatabase;
 import com.eric.sti3desafio.model.Pedido;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class PedidosFragment extends Fragment {
     private PedidoAdapter pedidoAdapter;
     Retrofit retrofit;
     private PedidoAdapter.RecyclerViewClickListener listener;
+    private MyDatabase db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,33 +73,41 @@ public class PedidosFragment extends Fragment {
 
     }
 
-    private void retrofitData(){
+    private void retrofitData() {
 
         DataService dataService = retrofit.create(DataService.class);
         Call<List<Pedido>> pedidoCall = dataService.recuperarPedidos();
+
+        db = Room.databaseBuilder(getActivity(), MyDatabase.class, "MyDB")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
 
         pedidoCall.enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
+
                     pedidos = response.body();
-                    //define o adapter
-                    pedidoAdapter = new PedidoAdapter(pedidos, getActivity(), listener);
-                    recyclerPedidos.setAdapter(pedidoAdapter);
+                    db.pedidoDAO().insertAll(pedidos);
+                    setAdapter();
                 }
+                else {
+                    setAdapter();
+                }
+
             }
 
             @Override
             public void onFailure(Call<List<Pedido>> call, Throwable t) {
-                Log.i("info", t+"");
+                Log.i("info", t + "");
+                setAdapter();
             }
-
         });
-
     }
 
-    public void pedidosClickListener(){
+    public void pedidosClickListener() {
 
         listener = new PedidoAdapter.RecyclerViewClickListener() {
             @Override
@@ -104,43 +115,21 @@ public class PedidosFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), DetalhesActivity.class);
 
-                //endereço
-                intent.putExtra("rua", pedidoAdapter.getItem(position).getEnderecoEntrega().getEndereco());
-                intent.putExtra("numero", pedidoAdapter.getItem(position).getEnderecoEntrega().getNumero());
-                intent.putExtra("cep", pedidoAdapter.getItem(position).getEnderecoEntrega().getCep());
-                intent.putExtra("bairro", pedidoAdapter.getItem(position).getEnderecoEntrega().getBairro());
-                intent.putExtra("cidade", pedidoAdapter.getItem(position).getEnderecoEntrega().getCidade());
-                intent.putExtra("estado", pedidoAdapter.getItem(position).getEnderecoEntrega().getEndereco());
-                intent.putExtra("complemento", pedidoAdapter.getItem(position).getEnderecoEntrega().getComplemento());
-                intent.putExtra("referencia", pedidoAdapter.getItem(position).getEnderecoEntrega().getReferencia());
-
-                //cliente
-                intent.putExtra("nome", pedidoAdapter.getItem(position).getCliente().getNome());
-
-                if (pedidoAdapter.getItem(position).getCliente().getCpf().equals("")){
-                    intent.putExtra("documento", pedidoAdapter.getItem(position).getCliente().getCnpj());
-                }
-                else{
-                    intent.putExtra("documento", pedidoAdapter.getItem(position).getCliente().getCpf());
-                }
-
-                intent.putExtra("nascimento", pedidoAdapter.getItem(position).getCliente().getDataNascimento());
-                intent.putExtra("email", pedidoAdapter.getItem(position).getCliente().getEmail());
-
-                //pedido
-                intent.putExtra("desconto", pedidoAdapter.getItem(position).getDesconto());
-                intent.putExtra("frete", pedidoAdapter.getItem(position).getFrete());
-                intent.putExtra("subtotal", pedidoAdapter.getItem(position).getSubTotal());
-                intent.putExtra("valortotal", pedidoAdapter.getItem(position).getValorTotal());
-                intent.putExtra("numeroPedido", Integer.toString(pedidoAdapter.getItem(position).getNumero()));
-
-                intent.putParcelableArrayListExtra("data", new ArrayList<>(pedidoAdapter.getItem(position).getItens()));
+                intent.putExtra("pedidoData", pedidoAdapter.getItem(position));
 
                 startActivity(intent);
 
             }
         };
 
+    }
+
+    public void setAdapter() {
+        List<Pedido> pedidosDb = new ArrayList<>();
+        pedidosDb = db.pedidoDAO().getAll();
+
+        pedidoAdapter = new PedidoAdapter(pedidosDb, getActivity(), listener);
+        recyclerPedidos.setAdapter(pedidoAdapter);
     }
 
 }

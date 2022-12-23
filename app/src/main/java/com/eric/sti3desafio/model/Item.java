@@ -1,23 +1,50 @@
 package com.eric.sti3desafio.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import static androidx.room.ForeignKey.CASCADE;
 
-public class Item implements Parcelable {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
+@Entity(
+        tableName = "itens",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = Pedido.class,
+                        parentColumns = {"id"},
+                        childColumns = {"ItemIdMap"},
+                        onDelete = CASCADE,
+                        onUpdate = CASCADE
+                )
+        }
+)
+public class Item implements Serializable {
+
+    @PrimaryKey
+    Long ItemRoomId = null;
+
+    @ColumnInfo(index = true)
+    String ItemIdMap;
+
+    @ColumnInfo(name = "idItem")
     private String id;
+
+    @ColumnInfo(name = "idPedido")
     private String idPedido;
+
+    @ColumnInfo(name = "nomeItem")
     private String nome;
+
+    @ColumnInfo(name = "quantidade")
     private String quantidade;
+
+    @ColumnInfo(name = "valorUnitario")
     private String valorUnitario;
 
-    protected Item(Parcel in) {
-        id = in.readString();
-        idPedido = in.readString();
-        nome = in.readString();
-        quantidade = in.readString();
-        valorUnitario = in.readString();
-    }
+    public Item() {}
 
     public String getId() {
         return id;
@@ -59,30 +86,19 @@ public class Item implements Parcelable {
         this.valorUnitario = valorUnitario;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public Long getItemRoomId() {
+        return ItemRoomId;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
-        parcel.writeString(idPedido);
-        parcel.writeString(nome);
-        parcel.writeString(quantidade);
-        parcel.writeString(valorUnitario);
+    public void setItemRoomId(Long itemRoomId) {
+        ItemRoomId = itemRoomId;
     }
 
-    public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>()
-    {
-        public Item createFromParcel(Parcel in)
-        {
-            return new Item(in);
-        }
-        public Item[] newArray(int size)
-        {
-            return new Item[size];
-        }
-    };
+    public String getItemIdMap() {
+        return ItemIdMap;
+    }
 
+    public void setItemIdMap(String itemIdMap) {
+        ItemIdMap = itemIdMap;
+    }
 }

@@ -1,39 +1,57 @@
 package com.eric.sti3desafio.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import static androidx.room.ForeignKey.CASCADE;
 
-public class Cliente implements Parcelable {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
+@Entity(
+        tableName = "clientes",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = Pedido.class,
+                        parentColumns = {"id"},
+                        childColumns = {"clienteIdMap"},
+                        onDelete = CASCADE,
+                        onUpdate = CASCADE
+                )
+        }
+)
+public class Cliente implements Serializable {
+
+    @PrimaryKey
+    Long ClienteRoomId = null;
+
+    @ColumnInfo(index = true)
+    String clienteIdMap;
+
+    @ColumnInfo(name = "idCliente")
     private String id;
+
+    @ColumnInfo(name = "nomeCliente")
     private String nome;
+
+    @ColumnInfo(name = "email")
     private String email;
+
+    @ColumnInfo(name = "cnpj")
     private String cnpj;
+
+    @ColumnInfo(name = "cpf")
     private String cpf;
+
+    @ColumnInfo(name = "razao_social")
     private String razaoSocial;
+
+    @ColumnInfo(name = "dataNascimento")
     private String dataNascimento;
 
-    protected Cliente(Parcel in) {
-        nome = in.readString();
-        email = in.readString();
-        id = in.readString();
-        cnpj = in.readString();
-        cpf = in.readString();
-        razaoSocial = in.readString();
-        dataNascimento = in.readString();
+    public Cliente() {
     }
-
-    public static final Parcelable.Creator<Cliente> CREATOR = new Parcelable.Creator<Cliente>()
-    {
-        public Cliente createFromParcel(Parcel in)
-        {
-            return new Cliente(in);
-        }
-        public Cliente[] newArray(int size)
-        {
-            return new Cliente[size];
-        }
-    };
 
     public String getId() {
         return id;
@@ -91,18 +109,19 @@ public class Cliente implements Parcelable {
         this.email = email;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public Long getClienteRoomId() {
+        return ClienteRoomId;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(nome);
-        parcel.writeString(email);
-        parcel.writeString(cnpj);
-        parcel.writeString(cpf);
-        parcel.writeString(razaoSocial);
-        parcel.writeString(dataNascimento);
+    public void setClienteRoomId(Long clienteRoomId) {
+        ClienteRoomId = clienteRoomId;
+    }
+
+    public String getClienteIdMap() {
+        return clienteIdMap;
+    }
+
+    public void setClienteIdMap(String clienteIdMap) {
+        this.clienteIdMap = clienteIdMap;
     }
 }

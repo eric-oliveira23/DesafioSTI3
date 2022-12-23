@@ -1,51 +1,62 @@
 package com.eric.sti3desafio.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.eric.sti3desafio.database.DataConverter;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Pedido implements Parcelable {
+@Entity(tableName = "pedidos")
+public class Pedido implements Serializable {
 
+    @Embedded
     private Cliente cliente;
+
+    @Embedded
     private EnderecoEntrega enderecoEntrega;
+
+    @TypeConverters({DataConverter.class})
     private List<Item> itens;
+
+    @TypeConverters({DataConverter.class})
     private List<Pagamento> pagamentos;
 
-    private int numero;
-    private String status;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     private String id;
+
+    @ColumnInfo(name = "numeroPedido")
+    private int numero;
+
+    @ColumnInfo(name = "status")
+    private String status;
+
+    @ColumnInfo(name = "dataCriacao")
     private String dataCriacao;
+
+    @ColumnInfo(name = "dataAlteracao")
     private String dataAlteracao;
+
+    @ColumnInfo(name = "desconto")
     private String desconto;
+
+    @ColumnInfo(name = "frete")
     private String frete;
+
+    @ColumnInfo(name = "subTotal")
     private String subTotal;
+
+    @ColumnInfo(name = "valorTotal")
     private String valorTotal;
 
-    protected Pedido(Parcel in) {
-        itens = in.createTypedArrayList(Item.CREATOR);
-        numero = in.readInt();
-        status = in.readString();
-        valorTotal = in.readString();
-        id = in.readString();
-        dataCriacao = in.readString();
-        dataAlteracao = in.readString();
-        desconto = in.readString();
-        frete = in.readString();
-        subTotal = in.readString();
-    }
-
-    public static final Parcelable.Creator<Pedido> CREATOR = new Parcelable.Creator<Pedido>()
-    {
-        public Pedido createFromParcel(Parcel in)
-        {
-            return new Pedido(in);
-        }
-        public Pedido[] newArray(int size)
-        {
-            return new Pedido[size];
-        }
-    };
+    public Pedido(){}
 
     public String getId() {
         return id;
@@ -151,22 +162,4 @@ public class Pedido implements Parcelable {
         this.status = status;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeTypedList(itens);
-        parcel.writeInt(numero);
-        parcel.writeString(status);
-        parcel.writeString(valorTotal);
-        parcel.writeString(id);
-        parcel.writeString(dataCriacao);
-        parcel.writeString(dataAlteracao);
-        parcel.writeString(frete);
-        parcel.writeString(desconto);
-        parcel.writeString(subTotal);
-    }
 }

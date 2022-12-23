@@ -1,5 +1,6 @@
 package com.eric.sti3desafio.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.eric.sti3desafio.R;
 import com.eric.sti3desafio.adapter.ItemAdapter;
-import com.eric.sti3desafio.model.Item;
-
-import java.util.ArrayList;
+import com.eric.sti3desafio.model.Pedido;
 
 public class DetalhesActivity extends AppCompatActivity {
 
@@ -75,58 +74,40 @@ public class DetalhesActivity extends AppCompatActivity {
 
     public void getData() {
 
-        ArrayList<Item> itemList;
-        itemList = this.getIntent().getParcelableArrayListExtra("data");
+        Intent i = getIntent();
+        Pedido pedido = (Pedido) i.getSerializableExtra("pedidoData");
 
-        Bundle extras = getIntent().getExtras();
-        //endereço
-        String rua = extras.getString("rua");
-        String numero = extras.getString("numero");
-        String cep = extras.getString("cep");
-        String bairro = extras.getString("bairro");
-        String cidade = extras.getString("cidade");
-        String estado = extras.getString("estado");
-        String complemento = extras.getString("complemento");
-        String referencia = extras.getString("referencia");
-
-        //cliente
-        String nome = extras.getString("nome");
-        String documento = extras.getString("documento");
-        String nascimento = extras.getString("nascimento");
-        String email = extras.getString("email");
-
-        //pedido
-        String desconto = extras.getString("desconto");
-        String frete = extras.getString("frete");
-        String subtotal = extras.getString("subtotal");
-        String valortotal = extras.getString("valortotal");
-        String numeroPedido = extras.getString("numeroPedido");
-
-        itemAdapter = new ItemAdapter(itemList, this);
+        itemAdapter = new ItemAdapter(pedido.getItens(), this);
         recyclerItens.setAdapter(itemAdapter);
 
         //endereço
-        txvRua.setText(rua);
-        txvNumeroEndereco.setText(numero);
-        txvCep.setText(cep);
-        txvBairro.setText(bairro);
-        txvCidade.setText(cidade);
-        txvEstado.setText(estado);
-        txvComplemento.setText(complemento);
-        txvReferencia.setText(referencia);
+        txvRua.setText(pedido.getEnderecoEntrega().getEndereco());
+        txvNumeroEndereco.setText(pedido.getEnderecoEntrega().getNumero());
+        txvCep.setText(pedido.getEnderecoEntrega().getCep());
+        txvBairro.setText(pedido.getEnderecoEntrega().getBairro());
+        txvCidade.setText(pedido.getEnderecoEntrega().getCidade());
+        txvEstado.setText(pedido.getEnderecoEntrega().getEstado());
+        txvComplemento.setText(pedido.getEnderecoEntrega().getComplemento());
+        txvReferencia.setText(pedido.getEnderecoEntrega().getReferencia());
 
         //cliente
-        txvCliente.setText(nome);
-        txvDocumento.setText(documento);
-        txvNascimento.setText(nascimento);
-        txvEmail.setText(email);
+        txvCliente.setText(pedido.getCliente().getNome());
+
+        if (pedido.getCliente().getCnpj().equals("")) {
+            txvDocumento.setText(pedido.getCliente().getCpf());
+        }else {
+            txvDocumento.setText(pedido.getCliente().getCnpj());
+        }
+
+        txvNascimento.setText(pedido.getCliente().getDataNascimento());
+        txvEmail.setText(pedido.getCliente().getEmail());
 
         //pedido
-        txvDesconto.setText("R$ "+desconto);
-        txvFrete.setText("R$ "+frete);
-        txvSubtotal.setText("R$ "+subtotal);
-        txvTotal.setText("R$ "+valortotal);
-        txvCodigo.setText("Número "+numeroPedido);
+        txvDesconto.setText("R$ "+pedido.getDesconto());
+        txvFrete.setText("R$ "+pedido.getFrete());
+        txvSubtotal.setText("R$ "+pedido.getSubTotal());
+        txvTotal.setText("R$ "+pedido.getValorTotal());
+        txvCodigo.setText("Número "+pedido.getNumero());
 
     }
 }

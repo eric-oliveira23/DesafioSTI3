@@ -1,35 +1,52 @@
 package com.eric.sti3desafio.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import static androidx.room.ForeignKey.CASCADE;
 
-public class Pagamento implements Parcelable {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
+@Entity(
+        tableName = "pagamentos",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = Pedido.class,
+                        parentColumns = {"id"},
+                        childColumns = {"PagamentoIdMap"},
+                        onDelete = CASCADE,
+                        onUpdate = CASCADE
+                )
+        }
+)
+
+public class Pagamento implements Serializable {
+
+    @PrimaryKey
+    Long PagamentoRoomId = null;
+
+    @ColumnInfo(index = true)
+    String PagamentoIdMap;
+
+    @ColumnInfo(name = "idPagamento")
     private String id;
+
+    @ColumnInfo(name = "parcela")
     private String parcela;
+
+    @ColumnInfo(name = "valor")
     private String valor;
+
+    @ColumnInfo(name = "codigo")
     private String codigo;
+
+    @ColumnInfo(name = "nomePagamento")
     private String nome;
 
-    protected Pagamento(Parcel in) {
-        id = in.readString();
-        parcela = in.readString();
-        valor = in.readString();
-        codigo = in.readString();
-        nome = in.readString();
+    public Pagamento() {
     }
-
-    public static final Creator<Pagamento> CREATOR = new Creator<Pagamento>() {
-        @Override
-        public Pagamento createFromParcel(Parcel in) {
-            return new Pagamento(in);
-        }
-
-        @Override
-        public Pagamento[] newArray(int size) {
-            return new Pagamento[size];
-        }
-    };
 
     public String getId() {
         return id;
@@ -71,17 +88,19 @@ public class Pagamento implements Parcelable {
         this.nome = nome;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public Long getPagamentoRoomId() {
+        return PagamentoRoomId;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
-        parcel.writeString(parcela);
-        parcel.writeString(valor);
-        parcel.writeString(codigo);
-        parcel.writeString(nome);
+    public void setPagamentoRoomId(Long pagamentoRoomId) {
+        PagamentoRoomId = pagamentoRoomId;
+    }
+
+    public String getPagamentoIdMap() {
+        return PagamentoIdMap;
+    }
+
+    public void setPagamentoIdMap(String pagamentoIdMap) {
+        PagamentoIdMap = pagamentoIdMap;
     }
 }
