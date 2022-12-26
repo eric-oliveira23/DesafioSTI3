@@ -39,6 +39,7 @@ public class PesquisarFragment extends Fragment {
     private RecyclerView recyclerSearch;
     PedidoAdapter pedidoAdapter;
     private List<Pedido> pedidos = new ArrayList<>();
+    List<Pedido> pedidosDb = new ArrayList<>();
     private PedidoAdapter.RecyclerViewClickListener listener;
     Retrofit retrofit;
     private MyDatabase db;
@@ -128,15 +129,17 @@ public class PesquisarFragment extends Fragment {
 
                     pedidos = response.body();
                     db.pedidoDAO().insertAll(pedidos);
-                    setAdapter();
                 }
-
+                setAdapter();
             }
 
             @Override
             public void onFailure(Call<List<Pedido>> call, Throwable t) {
                 Log.i("info", t + "");
                 setAdapter();
+                Snackbar snackbar = Snackbar
+                        .make(getView(), "Não foi possível conectar-se aos serviços.", Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         });
     }
@@ -159,15 +162,15 @@ public class PesquisarFragment extends Fragment {
     }
 
     public void setAdapter() {
-        List<Pedido> pedidosDb = new ArrayList<>();
         pedidosDb = db.pedidoDAO().getAll();
 
         pedidoAdapter = new PedidoAdapter(pedidosDb, getActivity(), listener);
         recyclerSearch.setAdapter(pedidoAdapter);
     }
+
     private void filterList(String text) {
         List<Pedido> filteredList = new ArrayList<>();
-        for (Pedido pedido : pedidos) {
+        for (Pedido pedido : pedidosDb) {
             if (pedido.getCliente().getNome().toLowerCase().contains(text.toLowerCase())) {
 
                 filteredList.add(pedido);

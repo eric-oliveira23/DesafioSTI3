@@ -16,10 +16,12 @@ import androidx.room.Room;
 
 import com.eric.sti3desafio.R;
 import com.eric.sti3desafio.activity.DetalhesActivity;
+import com.eric.sti3desafio.activity.OfflineActivity;
 import com.eric.sti3desafio.adapter.PedidoAdapter;
 import com.eric.sti3desafio.api.DataService;
 import com.eric.sti3desafio.database.MyDatabase;
 import com.eric.sti3desafio.model.Pedido;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ public class PedidosFragment extends Fragment {
     Retrofit retrofit;
     private PedidoAdapter.RecyclerViewClickListener listener;
     private MyDatabase db;
+    private List<Pedido> pedidosDb = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,18 +94,20 @@ public class PedidosFragment extends Fragment {
 
                     pedidos = response.body();
                     db.pedidoDAO().insertAll(pedidos);
-                    setAdapter();
                 }
-                else {
                     setAdapter();
-                }
-
             }
 
             @Override
             public void onFailure(Call<List<Pedido>> call, Throwable t) {
                 Log.i("info", t + "");
                 setAdapter();
+                if (pedidosDb.isEmpty()){
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "Não foi possível conectar-se aos serviços.", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                    startActivity(new Intent(getActivity(), OfflineActivity.class));
+                }
             }
         });
     }
@@ -125,7 +130,6 @@ public class PedidosFragment extends Fragment {
     }
 
     public void setAdapter() {
-        List<Pedido> pedidosDb = new ArrayList<>();
         pedidosDb = db.pedidoDAO().getAll();
 
         pedidoAdapter = new PedidoAdapter(pedidosDb, getActivity(), listener);

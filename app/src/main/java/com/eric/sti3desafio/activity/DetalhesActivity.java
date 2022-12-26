@@ -84,13 +84,25 @@ public class DetalhesActivity extends AppCompatActivity {
         txvRua.setText(pedido.getEnderecoEntrega().getEndereco());
         txvNumeroEndereco.setText(pedido.getEnderecoEntrega().getNumero());
         txvCep.setText(pedido.getEnderecoEntrega().getCep());
-        txvBairro.setText(pedido.getEnderecoEntrega().getBairro());
         txvCidade.setText(pedido.getEnderecoEntrega().getCidade());
         txvEstado.setText(pedido.getEnderecoEntrega().getEstado());
-        txvComplemento.setText(pedido.getEnderecoEntrega().getComplemento());
-        txvReferencia.setText(pedido.getEnderecoEntrega().getReferencia());
+        //
+        if (pedido.getEnderecoEntrega().getComplemento().equals(""))
+            txvComplemento.setText(R.string.default_details);
+        else
+            txvComplemento.setText(pedido.getEnderecoEntrega().getComplemento());
+        //
+        if (pedido.getEnderecoEntrega().getReferencia().equals(""))
+            txvReferencia.setText(R.string.default_details);
+        else
+            txvReferencia.setText(pedido.getEnderecoEntrega().getReferencia());
+        //
+        if (pedido.getEnderecoEntrega().getBairro().equals(""))
+            txvBairro.setText(R.string.default_details);
+        else
+        txvBairro.setText(pedido.getEnderecoEntrega().getBairro());
 
-        //cliente
+        //Client
         txvCliente.setText(pedido.getCliente().getNome());
 
         if (pedido.getCliente().getCnpj().equals("")) {
@@ -102,7 +114,7 @@ public class DetalhesActivity extends AppCompatActivity {
         txvNascimento.setText(pedido.getCliente().getDataNascimento());
         txvEmail.setText(pedido.getCliente().getEmail());
 
-        //pedido
+        //Request
         txvDesconto.setText("R$ "+pedido.getDesconto());
         txvFrete.setText("R$ "+pedido.getFrete());
         txvSubtotal.setText("R$ "+pedido.getSubTotal());

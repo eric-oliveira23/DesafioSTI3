@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/drawable/btn_bg.xml" value="0.2075" />
+        <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/drawable/btn_error2_bg.xml" value="0.2075" />
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/drawable/details_bg.xml" value="0.311" />
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/drawable/ic_chevron_left.xml" value="0.196" />
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/drawable/layout_details.xml" value="0.2165" />
@@ -12,6 +14,7 @@
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/layout/activity_detalhes.xml" value="0.33" />
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/layout/activity_home.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/layout/activity_offline.xml" value="0.3625" />
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/layout/app_bar_home.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/layout/app_bar_main.xml" value="0.25" />
         <entry key="..\:/Users/T-GAMER/AndroidStudioProjects/STI3Desafio/app/src/main/res/layout/content_home.xml" value="0.36666666666666664" />

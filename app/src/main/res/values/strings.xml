@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">STI3Desafio</string>
     <string name="sign">R$ </string>
+    <string name="default_details">Não informado</string>
 </resources>

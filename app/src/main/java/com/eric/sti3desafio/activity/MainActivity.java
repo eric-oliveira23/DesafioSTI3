@@ -1,6 +1,8 @@
 package com.eric.sti3desafio.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,9 +18,11 @@ import com.eric.sti3desafio.R;
 import com.eric.sti3desafio.fragment.HomeFragment;
 import com.eric.sti3desafio.fragment.PesquisarFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean doubleBackPressed;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     HomeFragment homeFragment = new HomeFragment();
@@ -63,12 +67,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void showFragment(Fragment fragmentToShow) {
-        // transições
+            // transições
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
-        // oculta todos os fragments
+            // oculta todos os fragments
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
             transaction.hide(fragment);
         }
@@ -82,6 +86,25 @@ public class MainActivity extends AppCompatActivity {
         drawer.closeDrawer(GravityCompat.START);
 
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (doubleBackPressed){
+            super.onBackPressed();
+            this.finishAffinity();
+        }
+        this.doubleBackPressed = true;
+        Snackbar snackbar = Snackbar.make(drawer, "Pressione novamente para sair", Snackbar.LENGTH_LONG);
+        snackbar.show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackPressed = false;
+            }
+        },2000);
     }
 
 }
