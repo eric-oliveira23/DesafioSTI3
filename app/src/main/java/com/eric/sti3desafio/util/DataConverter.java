@@ -34,7 +34,7 @@ public class DataConverter {
         return itemList;
     }
 
-    //pagamento
+    //Payment
 
     @TypeConverter
     public String fromPagamentosList(List<Pagamento> pagamentos) {
@@ -53,7 +53,7 @@ public class DataConverter {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Item>>() {}.getType();
+        Type type = new TypeToken<List<Pagamento>>() {}.getType();
         List<Pagamento> pagamentosList = gson.fromJson(pagamentos, type);
         return pagamentosList;
     }
