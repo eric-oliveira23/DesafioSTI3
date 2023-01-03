@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">STI3Desafio</string>
+    <string name="app_name">Pedidos STI3</string>
     <string name="sign">R$ </string>
     <string name="default_details">Não informado</string>
+    <string name="message_offline">Você está offline!</string>
+    <string name="message_backpressed">Pressione novamente para sair</string>
+    <string name="SearchNotFound">Não foi possível encontrar este cliente</string>
 </resources>

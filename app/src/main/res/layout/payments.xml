@@ -5,33 +5,32 @@
     android:background="@color/grey_primary">
 
     <TextView
-        android:id="@+id/txvQuantidade"
+        android:id="@+id/txvPortion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="1x"
+        android:text="Parcela: 1"
         android:textColor="@color/light_grey" />
 
     <TextView
-        android:id="@+id/txvProduto"
+        android:id="@+id/txvPaymentMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txvQuantidade"
+        android:layout_below="@id/txvPortion"
         android:layout_marginStart="20dp"
-        android:text="Tênis Stark Runner"
-        android:maxWidth="200dp"
+        android:text="Boleto"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txvPreco"
+        android:id="@+id/txvPortionValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txvQuantidade"
+        android:layout_below="@+id/txvPortion"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
-        android:text="R$ 150,00"/>
+        android:text="R$ 150,00" />
 
 </RelativeLayout>

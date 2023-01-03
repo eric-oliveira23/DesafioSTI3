@@ -11,14 +11,13 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.eric.sti3desafio.R;
 import com.google.android.material.snackbar.Snackbar;
 
-public class OfflineActivity extends AppCompatActivity implements View.OnClickListener {
+public class OfflineActivity extends AppCompatActivity{
 
     private Button btnRefresh, btnWifi;
     private boolean doubleBackPressed = false;
@@ -33,27 +32,26 @@ public class OfflineActivity extends AppCompatActivity implements View.OnClickLi
         btnRefresh = findViewById(R.id.btnRefresh);
         btnWifi = findViewById(R.id.btnWifi);
 
-        btnRefresh.setOnClickListener(this);
-        btnWifi.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btnRefresh:
-
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 if (isOnline()){
                     finish();
-                    startActivity(new Intent(this, MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
-                else
-                    Toast.makeText(this, "Você está offline", Toast.LENGTH_SHORT).show();
-                break;
+                else {
+                    Snackbar snackbar = Snackbar.make(relativeLayout, R.string.message_offline, Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        });
 
-            case R.id.btnWifi:
+        btnWifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-                break;
-        }
+            }
+        });
     }
 
     @Override
@@ -64,7 +62,7 @@ public class OfflineActivity extends AppCompatActivity implements View.OnClickLi
             this.finishAffinity();
         }
         this.doubleBackPressed = true;
-        Snackbar snackbar = Snackbar.make(relativeLayout, "Pressione novamente para sair", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(relativeLayout, R.string.message_backpressed, Snackbar.LENGTH_LONG);
         snackbar.show();
 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {

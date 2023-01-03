@@ -15,7 +15,7 @@ import java.io.Serializable;
                 @ForeignKey(
                         entity = Pedido.class,
                         parentColumns = {"id"},
-                        childColumns = {"PagamentoIdMap"},
+                        childColumns = {"PagamentoRoomId"},
                         onDelete = CASCADE,
                         onUpdate = CASCADE
                 )
@@ -26,9 +26,6 @@ public class Pagamento implements Serializable {
 
     @PrimaryKey
     Long PagamentoRoomId = null;
-
-    @ColumnInfo(index = true)
-    String PagamentoIdMap;
 
     @ColumnInfo(name = "idPagamento")
     private String id;
@@ -45,8 +42,7 @@ public class Pagamento implements Serializable {
     @ColumnInfo(name = "nomePagamento")
     private String nome;
 
-    public Pagamento() {
-    }
+    public Pagamento() {}
 
     public String getId() {
         return id;
@@ -96,11 +92,4 @@ public class Pagamento implements Serializable {
         PagamentoRoomId = pagamentoRoomId;
     }
 
-    public String getPagamentoIdMap() {
-        return PagamentoIdMap;
-    }
-
-    public void setPagamentoIdMap(String pagamentoIdMap) {
-        PagamentoIdMap = pagamentoIdMap;
-    }
 }

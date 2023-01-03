@@ -1,4 +1,4 @@
-package com.eric.sti3desafio.database;
+package com.eric.sti3desafio.util;
 
 import androidx.room.TypeConverter;
 

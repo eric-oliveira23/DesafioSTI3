@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/grey_secondary"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:id="@+id/txvTop"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:background="@drawable/shimmer_bg"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:id="@+id/txvNumero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:textSize="12sp"
+            android:layout_toEndOf="@+id/txvTop"/>
+
+        <TextView
+            android:id="@+id/txvnome"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shimmer_bg"
+            android:layout_below="@+id/txvNumero"
+            />
+
+        <TextView
+            android:id="@+id/txvemail"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txvnome"
+            android:background="@drawable/shimmer_bg"
+            android:layout_marginTop="5dp"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/txvstatus"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/shimmer_bg"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txvtotal"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvstatus"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shimmer_bg"/>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.eric.sti3desafio.R;
-import com.eric.sti3desafio.fragment.HomeFragment;
+import com.eric.sti3desafio.fragment.PedidosFragment;
 import com.eric.sti3desafio.fragment.PesquisarFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean doubleBackPressed;
     private DrawerLayout drawer;
     private NavigationView navigationView;
-    HomeFragment homeFragment = new HomeFragment();
+    PedidosFragment pedidosFragment = new PedidosFragment();
     PesquisarFragment pesquisarFragment = new PesquisarFragment();
 
     @Override
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        showFragment(homeFragment);
+        showFragment(pedidosFragment);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.itemProdutos:
-                            showFragment(homeFragment);
+                            showFragment(pedidosFragment);
                         break;
                 }
                 return true;

@@ -2,7 +2,6 @@ package com.eric.sti3desafio.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ import com.eric.sti3desafio.adapter.PedidoAdapter;
 import com.eric.sti3desafio.api.DataService;
 import com.eric.sti3desafio.database.MyDatabase;
 import com.eric.sti3desafio.model.Pedido;
-import com.google.android.material.snackbar.Snackbar;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +40,7 @@ public class PedidosFragment extends Fragment {
     private PedidoAdapter.RecyclerViewClickListener listener;
     private MyDatabase db;
     private List<Pedido> pedidosDb = new ArrayList<>();
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,10 @@ public class PedidosFragment extends Fragment {
                 .baseUrl("https://desafiotecnicosti3.azurewebsites.net")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+        shimmerFrameLayout = getView().findViewById(R.id.shimmer);
+        shimmerFrameLayout.startShimmer();
+
 
         recyclerPedidos = getView().findViewById(R.id.recyclerPedidos);
 
@@ -100,12 +104,8 @@ public class PedidosFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Pedido>> call, Throwable t) {
-                Log.i("info", t + "");
                 setAdapter();
                 if (pedidosDb.isEmpty()){
-                    Snackbar snackbar = Snackbar
-                            .make(getView(), "Não foi possível conectar-se aos serviços.", Snackbar.LENGTH_LONG);
-                    snackbar.show();
                     startActivity(new Intent(getActivity(), OfflineActivity.class));
                 }
             }
@@ -126,7 +126,6 @@ public class PedidosFragment extends Fragment {
 
             }
         };
-
     }
 
     public void setAdapter() {
@@ -134,6 +133,9 @@ public class PedidosFragment extends Fragment {
 
         pedidoAdapter = new PedidoAdapter(pedidosDb, getActivity(), listener);
         recyclerPedidos.setAdapter(pedidoAdapter);
+
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
     }
 
 }

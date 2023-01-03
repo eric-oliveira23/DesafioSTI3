@@ -21,6 +21,7 @@ import com.eric.sti3desafio.adapter.PedidoAdapter;
 import com.eric.sti3desafio.api.DataService;
 import com.eric.sti3desafio.database.MyDatabase;
 import com.eric.sti3desafio.model.Pedido;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class PesquisarFragment extends Fragment {
     private PedidoAdapter.RecyclerViewClickListener listener;
     Retrofit retrofit;
     private MyDatabase db;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     public PesquisarFragment() {
 
@@ -64,6 +66,9 @@ public class PesquisarFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        shimmerFrameLayout = getView().findViewById(R.id.shimmer);
+        shimmerFrameLayout.startShimmer();
 
         searchView = getView().findViewById(R.id.searchView);
 
@@ -137,9 +142,6 @@ public class PesquisarFragment extends Fragment {
             public void onFailure(Call<List<Pedido>> call, Throwable t) {
                 Log.i("info", t + "");
                 setAdapter();
-                Snackbar snackbar = Snackbar
-                        .make(getView(), "Não foi possível conectar-se aos serviços.", Snackbar.LENGTH_LONG);
-                snackbar.show();
             }
         });
     }
@@ -166,6 +168,9 @@ public class PesquisarFragment extends Fragment {
 
         pedidoAdapter = new PedidoAdapter(pedidosDb, getActivity(), listener);
         recyclerSearch.setAdapter(pedidoAdapter);
+
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
     }
 
     private void filterList(String text) {
@@ -180,7 +185,7 @@ public class PesquisarFragment extends Fragment {
 
         if (filteredList.isEmpty()) {
             Snackbar snackbar = Snackbar
-                    .make(getView(), "Nenhum cliente encontrado", Snackbar.LENGTH_LONG);
+                    .make(getView(), R.string.SearchNotFound, Snackbar.LENGTH_LONG);
             snackbar.show();
         } else {
             pedidoAdapter.setFilteredList(filteredList);

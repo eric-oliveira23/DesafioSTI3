@@ -7,7 +7,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.eric.sti3desafio.database.DataConverter;
+import com.eric.sti3desafio.util.DataConverter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Pedido implements Serializable {
     private List<Item> itens;
 
     @TypeConverters({DataConverter.class})
-    private List<Pagamento> pagamentos;
+    private List<Pagamento> pagamento;
 
     @PrimaryKey
     @NonNull
@@ -114,12 +114,12 @@ public class Pedido implements Serializable {
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    public List<Pagamento> getPagamentos() {
-        return pagamentos;
+    public List<Pagamento> getPagamento() {
+        return pagamento;
     }
 
-    public void setPagamentos(List<Pagamento> pagamentos) {
-        this.pagamentos = pagamentos;
+    public void setPagamento(List<Pagamento> pagamento) {
+        this.pagamento = pagamento;
     }
 
     public List<Item> getItens() {

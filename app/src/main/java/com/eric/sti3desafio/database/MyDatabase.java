@@ -10,7 +10,7 @@ import com.eric.sti3desafio.model.Item;
 import com.eric.sti3desafio.model.Pagamento;
 import com.eric.sti3desafio.model.Pedido;
 
-@Database(entities = {Pedido.class, Cliente.class, EnderecoEntrega.class, Item.class, Pagamento.class}, version = 7, exportSchema = false)
+@Database(entities = {Pedido.class, Cliente.class, EnderecoEntrega.class, Item.class, Pagamento.class}, version = 11, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
 
     public abstract PedidoDAO pedidoDAO();

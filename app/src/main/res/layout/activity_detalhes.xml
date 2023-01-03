@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_primary">
+    android:background="@color/grey_primary"
+    android:scrollbars="none">
 
     <RelativeLayout
+        android:id="@+id/relativeMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey_primary"
@@ -33,23 +35,13 @@
                 android:padding="12dp"
                 android:src="@drawable/ic_chevron_left" />
 
-            <ImageView
-                android:id="@+id/imgBox"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_toEndOf="@id/btnBack"
-                android:src="@drawable/box" />
-
             <TextView
                 android:id="@+id/txvCodigo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/imgBox"
+                android:layout_toEndOf="@+id/btnBack"
                 android:text="Número: 1" />
 
             <TextView
@@ -57,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txvCodigo"
-                android:layout_toEndOf="@+id/imgBox"
+                android:layout_toEndOf="@+id/btnBack"
                 android:text="Informações do pedido"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -65,10 +57,72 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/txvstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeTop"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="Pedido aprovado"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/txvstatus"
+            android:layout_centerHorizontal="true"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/aprovado" />
+
+
+        <TextView
+            android:id="@+id/lblCriacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/animationView"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Data de criação"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvCriacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblCriacao"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblAlteracao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvCriacao"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Data de alteração"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txvAlteracao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblAlteracao"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/lblDadosEntrega"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/relativeTop"
+            android:layout_below="@+id/txvAlteracao"
             android:layout_alignParentStart="true"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
@@ -363,13 +417,31 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/lblItems" />
 
+        <TextView
+            android:id="@+id/lblPagamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recyclerItens"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="Pagamento"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPagamentos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblPagamento" />
+
         <View
             android:id="@+id/dividerPrices"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/recyclerItens"
+            android:layout_below="@+id/recyclerPagamentos"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@color/black" />

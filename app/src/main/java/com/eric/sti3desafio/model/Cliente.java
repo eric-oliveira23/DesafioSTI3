@@ -50,8 +50,7 @@ public class Cliente implements Serializable {
     @ColumnInfo(name = "dataNascimento")
     private String dataNascimento;
 
-    public Cliente() {
-    }
+    public Cliente() {}
 
     public String getId() {
         return id;
