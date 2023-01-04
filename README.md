@@ -63,9 +63,13 @@ https://user-images.githubusercontent.com/95176405/210460333-611c1846-74ad-4325-
 **Linguagens:** XML, Java, SQL
 **Dependências:** Room Database, ShimmerEffect, Retrofit, RetrofitGsonConverter, LottieFiles.
 
-#Conhecimento adquirido
+# Conhecimento adquirido
 
 Essencial o conhecimento adquirido com a manipulação da API e com os objetos em json, foi necessário manipular objetos dentro de outros objetos e listas, que deram a oportunidade de trabalhar de uma maneira diferente com esse projeto, o Retrofit ajudou muito com esse processo.
+
 O room database também foi uma das bibliotecas que facilitaram muito o desenvolvimento do projeto, foi o meu primeiro contato com a biblioteca e pude ver a capacidade gigantesca de trabalhar usando dados locais com essa ferramenta.
+
 A verificação de conexão com o ConnectivityManager também foi um aprendizado que irei aproveitar em futuros projetos durante minha carreira, dando a possibilidade de verificação da conexão constante.
+
+Com o projeto também foi possível aprender mais sobre animações, e layouts em geral.
 
