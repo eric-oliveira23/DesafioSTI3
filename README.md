@@ -57,6 +57,13 @@ O aplicativo salva tudo em seu banco de dados a cada reaquisição feita automat
 https://user-images.githubusercontent.com/95176405/210460333-611c1846-74ad-4325-81d9-adda269be015.mp4
 
 
+# É possível encontrar nesse app:
+
+* Listagem de produtos
+* Tela de detalhes com informações de venda, pagamento e itens comprados
+* Atualização do banco local a cada reaquisição da API, permitindo a visualização de dados offline
+* Aba de pesquisa de clientes
+* Verificação de internet, se não haver nenhum dado no banco local
 
 # Ferramentas utilizadas
 
