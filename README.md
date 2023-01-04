@@ -59,8 +59,11 @@ https://user-images.githubusercontent.com/95176405/210460333-611c1846-74ad-4325-
 
 
 # Ferramentas utilizadas
+
 **IDE:** Android Studio
+
 **Linguagens:** XML, Java, SQL
+
 **Dependências:** Room Database, ShimmerEffect, Retrofit, RetrofitGsonConverter, LottieFiles.
 
 # Conhecimento adquirido
