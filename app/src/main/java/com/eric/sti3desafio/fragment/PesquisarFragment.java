@@ -19,6 +19,7 @@ import com.eric.sti3desafio.R;
 import com.eric.sti3desafio.activity.DetalhesActivity;
 import com.eric.sti3desafio.adapter.PedidoAdapter;
 import com.eric.sti3desafio.api.DataService;
+import com.eric.sti3desafio.api.ServiceConnection;
 import com.eric.sti3desafio.database.MyDatabase;
 import com.eric.sti3desafio.model.Pedido;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -31,7 +32,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class PesquisarFragment extends Fragment {
@@ -45,6 +45,7 @@ public class PesquisarFragment extends Fragment {
     Retrofit retrofit;
     private MyDatabase db;
     private ShimmerFrameLayout shimmerFrameLayout;
+    ServiceConnection serviceConnection = new ServiceConnection();
 
     public PesquisarFragment() {
 
@@ -92,10 +93,7 @@ public class PesquisarFragment extends Fragment {
             }
         });
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://desafiotecnicosti3.azurewebsites.net")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        retrofit = serviceConnection.getBaseUrl();
 
         //Recycler
         recyclerSearch = getView().findViewById(R.id.recyclerSearch);
