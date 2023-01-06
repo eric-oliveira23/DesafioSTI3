@@ -57,6 +57,9 @@ O aplicativo salva tudo em seu banco de dados a cada reaquisição feita automat
 https://user-images.githubusercontent.com/95176405/210460333-611c1846-74ad-4325-81d9-adda269be015.mp4
 
 
+## O aplicativo pode ser instalado pelo apk, que pode ser encontrado no diretório apk.
+
+
 # É possível encontrar nesse app:
 
 * Listagem de produtos
