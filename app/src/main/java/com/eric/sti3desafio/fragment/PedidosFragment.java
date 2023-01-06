@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.eric.sti3desafio.R;
 import com.eric.sti3desafio.activity.DetalhesActivity;
@@ -19,6 +18,7 @@ import com.eric.sti3desafio.activity.OfflineActivity;
 import com.eric.sti3desafio.adapter.PedidoAdapter;
 import com.eric.sti3desafio.api.DataService;
 import com.eric.sti3desafio.api.ServiceConnection;
+import com.eric.sti3desafio.database.DbInstance;
 import com.eric.sti3desafio.database.MyDatabase;
 import com.eric.sti3desafio.model.Pedido;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -42,6 +42,7 @@ public class PedidosFragment extends Fragment {
     private List<Pedido> pedidosDb = new ArrayList<>();
     private ShimmerFrameLayout shimmerFrameLayout;
     ServiceConnection serviceConnection = new ServiceConnection();
+    DbInstance dbInstance = new DbInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,10 +84,7 @@ public class PedidosFragment extends Fragment {
         DataService dataService = retrofit.create(DataService.class);
         Call<List<Pedido>> pedidoCall = dataService.recuperarPedidos();
 
-        db = Room.databaseBuilder(getActivity(), MyDatabase.class, "MyDB")
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
+        db = dbInstance.getDbInstance(getActivity());
 
         pedidoCall.enqueue(new Callback<List<Pedido>>() {
             @Override
